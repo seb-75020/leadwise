@@ -49,33 +49,43 @@ const Dashboard: React.FC = () => {
     icon: React.ReactNode;
     trend?: 'up' | 'down';
     trendValue?: string;
-    color?: string;
-  }> = ({ title, value, subtitle, icon, trend, trendValue, color = 'primary' }) => (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
-          <p className={`text-2xl font-bold text-${color}-600 mb-1`}>{value}</p>
-          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
-          {trend && trendValue && (
-            <div className={`flex items-center mt-2 text-sm ${
-              trend === 'up' ? 'text-green-600' : 'text-red-600'
-            }`}>
-              {trend === 'up' ? (
-                <ArrowUpRight className="w-4 h-4 mr-1" />
-              ) : (
-                <ArrowDownRight className="w-4 h-4 mr-1" />
-              )}
-              <span>{trendValue}</span>
-            </div>
-          )}
-        </div>
-        <div className={`w-12 h-12 bg-${color}-100 rounded-lg flex items-center justify-center`}>
-          {icon}
+    color?: 'primary' | 'green' | 'blue' | 'purple';
+  }> = ({ title, value, subtitle, icon, trend, trendValue, color = 'primary' }) => {
+    const colorClasses: Record<'primary' | 'green' | 'blue' | 'purple', { text: string; bg: string }> = {
+      primary: { text: 'text-primary-600', bg: 'bg-primary-100' },
+      green: { text: 'text-green-600', bg: 'bg-green-100' },
+      blue: { text: 'text-blue-600', bg: 'bg-blue-100' },
+      purple: { text: 'text-purple-600', bg: 'bg-purple-100' },
+    };
+    const classes = colorClasses[color] || colorClasses.primary;
+
+    return (
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
+        <div className="flex items-center justify-between">
+          <div className="flex-1">
+            <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
+            <p className={`text-2xl font-bold ${classes.text} mb-1`}>{value}</p>
+            {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+            {trend && trendValue && (
+              <div
+                className={`flex items-center mt-2 text-sm ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}
+              >
+                {trend === 'up' ? (
+                  <ArrowUpRight className="w-4 h-4 mr-1" />
+                ) : (
+                  <ArrowDownRight className="w-4 h-4 mr-1" />
+                )}
+                <span>{trendValue}</span>
+              </div>
+            )}
+          </div>
+          <div className={`w-12 h-12 ${classes.bg} rounded-lg flex items-center justify-center`}>
+            {icon}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="space-y-8 animate-fade-in">
