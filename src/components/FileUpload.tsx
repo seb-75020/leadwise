@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { 
-  Upload, 
-  File, 
-  CheckCircle, 
-  AlertCircle, 
+import {
+  Upload,
+  File as FileIcon,
+  CheckCircle,
+  AlertCircle,
   Clock,
   X,
   Plus
@@ -96,7 +96,7 @@ const FileUpload: React.FC = () => {
       case 'error':
         return <AlertCircle className="w-5 h-5 text-red-500" />;
       default:
-        return <File className="w-5 h-5 text-gray-400" />;
+          return <FileIcon className="w-5 h-5 text-gray-400" />;
     }
   };
 
@@ -185,7 +185,7 @@ const FileUpload: React.FC = () => {
               {files.map((file, index) => (
                 <div key={index} className="flex items-center justify-between bg-gray-50 px-4 py-3 rounded-lg">
                   <div className="flex items-center space-x-3">
-                    <File className="w-5 h-5 text-gray-400" />
+                    <FileIcon className="w-5 h-5 text-gray-400" />
                     <div>
                       <p className="font-medium text-gray-900">{file.name}</p>
                       <p className="text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
@@ -231,7 +231,7 @@ const FileUpload: React.FC = () => {
                 <tr key={upload.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150">
                   <td className="py-4 px-4">
                     <div className="flex items-center space-x-3">
-                      <File className="w-5 h-5 text-gray-400" />
+                      <FileIcon className="w-5 h-5 text-gray-400" />
                       <div>
                         <p className="font-medium text-gray-900">{upload.fileName}</p>
                         <p className="text-sm text-gray-500 uppercase">{upload.fileType}</p>
